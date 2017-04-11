@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextTraverser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" MinHeight="300" MinWidth="370">
+        Title="MainWindow" Height="350" Width="525" MinHeight="300" MinWidth="370"
+        SizeChanged="recordNewSize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="272*"/>

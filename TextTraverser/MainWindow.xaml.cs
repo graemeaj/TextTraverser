@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace TextTraverser
 {
@@ -33,6 +34,12 @@ namespace TextTraverser
             searcher.getText("C:\\TEMP\\GRAEME.TXT");
             latestTime = DateTime.Now;
             settings = new Config();
+            System.Windows.Application.Current.MainWindow.Height = settings.windowHeight;
+            System.Windows.Application.Current.MainWindow.Height = settings.windowWidth;
+            System.Windows.Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            Left = settings.windowLocationX;
+            Top = settings.windowLocationY;
+
         }
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -158,6 +165,13 @@ namespace TextTraverser
         {
             Environment.Exit(0);
 
+        }
+        
+        private void recordNewSize(object sender, RoutedEventArgs e)
+        {
+            settings.changeSetting("windowWidth", Convert.ToString(System.Windows.Application.Current.MainWindow.Width));
+            settings.changeSetting("windowHeight", Convert.ToString(System.Windows.Application.Current.MainWindow.Height));
+            System.Console.Write("\n" + "size changed  " + "\n");
         }
     }
 }
