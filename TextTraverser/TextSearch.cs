@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using StringExtensions;
+using System.Configuration;
 
 namespace TextTraverser
 {
@@ -20,7 +21,7 @@ namespace TextTraverser
 
         public object New { get; private set; }
 
-        public String getText(String textFileLocation)//method to aquire text content and put it into a string
+        public String getText(String textFileLocation, Configuration config)//method to aquire text content and put it into a string
         {
             
             if(System.IO.File.Exists(textFileLocation) == true)//if the file exists
@@ -32,6 +33,8 @@ namespace TextTraverser
                 objReader.Close();//close the reader
                 textList.Clear();
                 EnlistString(text);//put the string into an organised list
+
+                Config.UpdatePreviousPaths(textFileLocation, config);
             }
             else
             {

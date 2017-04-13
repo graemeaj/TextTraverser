@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace TextTraverser
 {
@@ -25,21 +26,48 @@ namespace TextTraverser
     {
         TextSearch searcher;
         DateTime latestTime;
+        Configuration config;
         Config settings;
         
         public MainWindow()
         {
             InitializeComponent();
-            searcher = new TextSearch();
-            searcher.getText("C:\\TEMP\\GRAEME.TXT");
+            searcher = new TextSearch();    
             latestTime = DateTime.Now;
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             settings = new Config();
-            System.Windows.Application.Current.MainWindow.Height = settings.windowHeight;
-            System.Windows.Application.Current.MainWindow.Height = settings.windowWidth;
-            System.Windows.Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-            Left = settings.windowLocationX;
-            Top = settings.windowLocationY;
+            searcher.getText(config.AppSettings.Settings["previousPath"].Value, config);
+            System.Windows.Application.Current.MainWindow.Height = Convert.ToDouble(config.AppSettings.Settings["windowHeight"].Value);
+            System.Windows.Application.Current.MainWindow.Width = Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value); 
 
+            System.Console.Write("the height is " + Convert.ToDouble(config.AppSettings.Settings["windowHeight"].Value));
+            System.Console.Write("the width is " + Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value));
+
+
+
+            System.Windows.Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
+            Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
+
+            
+            this.Loaded += new RoutedEventHandler(windowLoaded);
+        }
+
+        public void windowLoaded(object sender, RoutedEventArgs e)
+        {
+            ResetPathText();
+            
+        }
+
+        public void ResetPathText()
+        {
+            if (config.AppSettings.Settings["previousPath"].Value != null)
+            {
+                ConfigurationManager.RefreshSection("appSettings");
+                textBoxPath.Text = config.AppSettings.Settings["previousPath"].Value.ToString();
+                System.Console.Write("\n" + config.AppSettings.Settings["previousPath"].Value.ToString() + " is the previous path");
+                System.Media.SystemSounds.Beep.Play();
+            }
         }
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -135,15 +163,33 @@ namespace TextTraverser
 
         public void list_item_clicked(object sender, RoutedEventArgs e)
         {
-            string path = this.listBox.SelectedItem.ToString();
-            path = TextManipulate.CleanUpString(path);
-            searcher.OpenFile(path);
+            if (this.listBox.SelectedItem != null)//checks if the listbox item selected is not null
+            {
+                string path = this.listBox.SelectedItem.ToString();//makes value into sting
+                path = TextManipulate.CleanUpString(path);//cleans up the string with a custom function to ensure the path will read
+                searcher.OpenFile(path);//opens path
+            }
+            else
+            {
+                //if the clicked listbox contains nothing
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string pathBarText = textBoxPath.GetLineText(0);
-            searcher.getText(pathBarText);
+            if (pathBarText != null && System.IO.File.Exists(pathBarText) == true)
+            {
+                searcher.getText(pathBarText, config);
+                ResetPathText();
+                notificationLabel.Content = "Success! Path \"" + pathBarText + "\" has been loaded";
+            }
+            else
+            {
+                notificationLabel.Content = "Failure. Path \"" + pathBarText + "\" could not be found";
+                textBoxPath.Text = config.AppSettings.Settings["previousPath"].Value.ToString();//returns the textbox to the previous successful query
+                System.Media.SystemSounds.Hand.Play();
+            }
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -169,9 +215,15 @@ namespace TextTraverser
         
         private void recordNewSize(object sender, RoutedEventArgs e)
         {
-            settings.changeSetting("windowWidth", Convert.ToString(System.Windows.Application.Current.MainWindow.Width));
-            settings.changeSetting("windowHeight", Convert.ToString(System.Windows.Application.Current.MainWindow.Height));
-            System.Console.Write("\n" + "size changed  " + "\n");
+            settings.changeSetting("windowWidth", Convert.ToString(System.Windows.Application.Current.MainWindow.Width), config);
+            settings.changeSetting("windowHeight", Convert.ToString(System.Windows.Application.Current.MainWindow.Height), config);
+            //System.Console.Write("\n" + "size changed  " + "\n");
+        }
+
+        public void recordNewWindowLocation(object sender, System.EventArgs e)
+        {
+            settings.changeSetting("windowLocationX", Convert.ToString(System.Windows.Application.Current.MainWindow.Left), config);
+            settings.changeSetting("windowLocationY", Convert.ToString(System.Windows.Application.Current.MainWindow.Top), config);
         }
     }
 }
