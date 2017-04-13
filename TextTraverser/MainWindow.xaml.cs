@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Reflection;
 
 namespace TextTraverser
 {
@@ -28,9 +29,18 @@ namespace TextTraverser
         DateTime latestTime;
         Configuration config;
         Config settings;
-        
+
+        string versionNumber;
+        string buildTime;
+
         public MainWindow()
         {
+
+            //meta information
+            versionNumber = "0.55";
+            buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
+
+
             InitializeComponent();
             searcher = new TextSearch();    
             latestTime = DateTime.Now;
@@ -200,6 +210,15 @@ namespace TextTraverser
         private void File_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            string aboutInfo;
+            aboutInfo = "V" + versionNumber + "\n";
+            aboutInfo += "current build time: " + buildTime + "\n";
+            aboutInfo += "Author: Graeme Judkins\n\ngraeme@judkins.ca\n\n©2017";
+            System.Windows.Forms.MessageBox.Show(aboutInfo);
         }
 
         private void File_Associations_Click(object sender, RoutedEventArgs e)
