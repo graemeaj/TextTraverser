@@ -37,7 +37,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.55";
+            versionNumber = "0.61";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -66,7 +66,8 @@ namespace TextTraverser
         public void windowLoaded(object sender, RoutedEventArgs e)
         {
             ResetPathText();
-            
+            updatePreviousPathsInMenu();
+
         }
 
         public void ResetPathText()
@@ -78,6 +79,16 @@ namespace TextTraverser
                 System.Console.Write("\n" + config.AppSettings.Settings["previousPath"].Value.ToString() + " is the previous path");
                 System.Media.SystemSounds.Beep.Play();
             }
+        }
+
+        public void updatePreviousPathsInMenu()
+        {
+            mostRecent.Header = config.AppSettings.Settings["previousPath"].Value;
+            second.Header = config.AppSettings.Settings["2ndPath"].Value;
+            third.Header = config.AppSettings.Settings["3rdPath"].Value;
+            fourth.Header = config.AppSettings.Settings["4thPath"].Value;
+            fifth.Header = config.AppSettings.Settings["5thPath"].Value;
+            sixth.Header = config.AppSettings.Settings["6thPath"].Value;
         }
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -188,15 +199,21 @@ namespace TextTraverser
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string pathBarText = textBoxPath.GetLineText(0);
-            if (pathBarText != null && System.IO.File.Exists(pathBarText) == true)
+            changePath(pathBarText);
+        }
+
+        private void changePath(string s)
+        {
+            if (s != null && System.IO.File.Exists(s) == true)
             {
-                searcher.getText(pathBarText, config);
+                searcher.getText(s, config);
                 ResetPathText();
-                notificationLabel.Content = "Success! Path \"" + pathBarText + "\" has been loaded";
+                notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded";
+                updatePreviousPathsInMenu();
             }
             else
             {
-                notificationLabel.Content = "Failure. Path \"" + pathBarText + "\" could not be found";
+                notificationLabel.Content = "Failure. Path \"" + s + "\" could not be found";
                 textBoxPath.Text = config.AppSettings.Settings["previousPath"].Value.ToString();//returns the textbox to the previous successful query
                 System.Media.SystemSounds.Hand.Play();
             }
@@ -215,7 +232,7 @@ namespace TextTraverser
         private void About_Click(object sender, RoutedEventArgs e)
         {
             string aboutInfo;
-            aboutInfo = "V" + versionNumber + "\n";
+            aboutInfo = "V" + versionNumber + " TextTraverser\n";
             aboutInfo += "current build time: " + buildTime + "\n";
             aboutInfo += "Author: Graeme Judkins\n\ngraeme@judkins.ca\n\n©2017";
             System.Windows.Forms.MessageBox.Show(aboutInfo);
@@ -243,6 +260,23 @@ namespace TextTraverser
         {
             settings.changeSetting("windowLocationX", Convert.ToString(System.Windows.Application.Current.MainWindow.Left), config);
             settings.changeSetting("windowLocationY", Convert.ToString(System.Windows.Application.Current.MainWindow.Top), config);
+        }
+
+        private void PreviousPathsClick(object sender, RoutedEventArgs e)
+        {
+            //make them open the files
+            System.Windows.Controls.MenuItem mI = sender as System.Windows.Controls.MenuItem;
+            string path = mI.Header.ToString();
+            changePath(path);
+        }
+
+        private void textBoxPath_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                string pathBarText = textBoxPath.GetLineText(0);
+                changePath(pathBarText);
+            }
         }
     }
 }

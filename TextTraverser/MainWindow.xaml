@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Left" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <ListBox x:Name="listBox" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25"/>
-        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" TextAlignment="Left" Margin="122,29,2,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="122,29,2,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button x:Name="button" Content="refresh path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="115" Height="23" Click="button_Click"/>
         <Label x:Name="label" Content="lines" Margin="0,57,2,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="58" Grid.Column="1" Height="26"/>
         <Label x:Name="matchesLabel" Content="0" Margin="0,57,56,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="70" Grid.Column="1" Height="26"/>
@@ -31,12 +31,12 @@
                 
                 <MenuItem x:Name="Options" Header="Options" HorizontalAlignment="Left" Width="140"/>
                 <MenuItem x:Name="RecentFiles" Header="Recent Files" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0">
-                    <MenuItem x:Name="mostRecent" Header="Most Recent" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="second" Header="--none--" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="third" Header="--none--" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="fourth" Header="--none--" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="fifth" Header="--none--" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="sixth" Header="--none--" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="second" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="third" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="fourth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="fifth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="sixth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
                 </MenuItem>
                 <MenuItem x:Name="File_Associations" Header="File Associations" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0"/>
                 <MenuItem x:Name="Exit" Header="Exit" HorizontalAlignment="Left" Width="140" Click="Exit_Click"/>

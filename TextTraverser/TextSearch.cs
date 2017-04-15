@@ -35,6 +35,7 @@ namespace TextTraverser
                 EnlistString(text);//put the string into an organised list
 
                 Config.UpdatePreviousPaths(textFileLocation, config);
+                
             }
             else
             {
