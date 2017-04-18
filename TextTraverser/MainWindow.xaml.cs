@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.71";
+            versionNumber = "0.72";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -211,6 +211,7 @@ namespace TextTraverser
             {
                 searcher.getText(s, config);
                 ResetPathText();
+                textBox.Text = "";
                 notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded";
                 updatePreviousPathsInMenu();
             }

@@ -19,7 +19,7 @@
             <RowDefinition Height="62"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Left" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <ListBox x:Name="listBox" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25"/>
         <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="100,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button x:Name="button" Content="refresh path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="93" Height="23" Click="button_Click"/>
