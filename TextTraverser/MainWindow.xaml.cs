@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.72";
+            versionNumber = "0.73";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -69,6 +69,7 @@ namespace TextTraverser
         {
             ResetPathText();
             updatePreviousPathsInMenu();
+            notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
 
         }
 
@@ -212,7 +213,7 @@ namespace TextTraverser
                 searcher.getText(s, config);
                 ResetPathText();
                 textBox.Text = "";
-                notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded";
+                notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded at " + DateTime.Now;
                 updatePreviousPathsInMenu();
             }
             else
