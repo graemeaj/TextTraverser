@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.70";
+            versionNumber = "0.71";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -85,12 +85,13 @@ namespace TextTraverser
 
         public void updatePreviousPathsInMenu()
         {
-            mostRecent.Header = config.AppSettings.Settings["previousPath"].Value;
-            second.Header = config.AppSettings.Settings["2ndPath"].Value;
-            third.Header = config.AppSettings.Settings["3rdPath"].Value;
-            fourth.Header = config.AppSettings.Settings["4thPath"].Value;
-            fifth.Header = config.AppSettings.Settings["5thPath"].Value;
-            sixth.Header = config.AppSettings.Settings["6thPath"].Value;
+            int truncateFactor = 13;
+            mostRecent.Header = Truncate.TruncateString(config.AppSettings.Settings["previousPath"].Value, truncateFactor);
+            second.Header = Truncate.TruncateString(config.AppSettings.Settings["2ndPath"].Value, truncateFactor);
+            third.Header = Truncate.TruncateString(config.AppSettings.Settings["3rdPath"].Value, truncateFactor);
+            fourth.Header = Truncate.TruncateString(config.AppSettings.Settings["4thPath"].Value, truncateFactor);
+            fifth.Header = Truncate.TruncateString(config.AppSettings.Settings["5thPath"].Value, truncateFactor);
+            sixth.Header = Truncate.TruncateString(config.AppSettings.Settings["6thPath"].Value, truncateFactor);
         }
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)

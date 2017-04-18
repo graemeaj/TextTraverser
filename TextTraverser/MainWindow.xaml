@@ -31,12 +31,12 @@
 
                 <MenuItem x:Name="Options" Header="Options" HorizontalAlignment="Left" Width="140"/>
                 <MenuItem x:Name="RecentFiles" Header="Recent Files" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0">
-                    <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="second" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="third" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="fourth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="fifth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
-                    <MenuItem x:Name="sixth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
+                    <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
+                    <MenuItem x:Name="second" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
+                    <MenuItem x:Name="third" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
+                    <MenuItem x:Name="fourth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
+                    <MenuItem x:Name="fifth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
+                    <MenuItem x:Name="sixth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Width="250" Margin="0,0,-50,0"/>
                 </MenuItem>
                 <MenuItem x:Name="File_Associations" Header="File Associations" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0"/>
                 <MenuItem x:Name="Exit" Header="Exit" HorizontalAlignment="Left" Width="140" Click="Exit_Click"/>

@@ -79,6 +79,7 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TextManipulate.cs" />
     <Compile Include="TextSearch.cs" />
+    <Compile Include="Truncate.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,7 +122,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
