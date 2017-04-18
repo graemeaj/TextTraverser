@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Reflection;
+using System.Diagnostics;
+using System.IO;
 
 namespace TextTraverser
 {
@@ -37,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.61";
+            versionNumber = "0.70";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -276,6 +278,23 @@ namespace TextTraverser
             {
                 string pathBarText = textBoxPath.GetLineText(0);
                 changePath(pathBarText);
+            }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == System.Windows.Forms.DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    changePath(file);
+                }
+                catch (IOException)
+                {
+                }
             }
         }
     }

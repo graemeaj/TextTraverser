@@ -21,14 +21,14 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Left" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <ListBox x:Name="listBox" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25"/>
-        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="122,29,2,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Button x:Name="button" Content="refresh path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="115" Height="23" Click="button_Click"/>
+        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="100,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Button x:Name="button" Content="refresh path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="93" Height="23" Click="button_Click"/>
         <Label x:Name="label" Content="lines" Margin="0,57,2,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="58" Grid.Column="1" Height="26"/>
         <Label x:Name="matchesLabel" Content="0" Margin="0,57,56,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="70" Grid.Column="1" Height="26"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="24" Margin="2,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="515" Grid.ColumnSpan="2"/>
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top"  Grid.ColumnSpan="2">
             <MenuItem x:Name="File" Header="File" Click="File_Click">
-                
+
                 <MenuItem x:Name="Options" Header="Options" HorizontalAlignment="Left" Width="140"/>
                 <MenuItem x:Name="RecentFiles" Header="Recent Files" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0">
                     <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Width="200"/>
@@ -45,5 +45,6 @@
         </Menu>
         <Label x:Name="label1" Content="Search:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label x:Name="notificationLabel" Content="hello" Margin="2,0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
+        <Button x:Name="button1" Content="..." Grid.Column="1" Margin="0,29,2,10" Click="button1_Click" HorizontalAlignment="Right" Width="33"/>
     </Grid>
 </Window>
