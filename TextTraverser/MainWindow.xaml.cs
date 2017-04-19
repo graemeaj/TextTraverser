@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.73";
+            versionNumber = "0.81";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -271,8 +271,36 @@ namespace TextTraverser
         {
             //make them open the files
             System.Windows.Controls.MenuItem mI = sender as System.Windows.Controls.MenuItem;
-            string path = mI.Header.ToString();
-            changePath(path);
+            //string path = mI.Header.ToString();
+            string path = "";
+            switch (mI.Name)
+            {
+                case "mostRecent":
+                    path = config.AppSettings.Settings["previousPath"].Value.ToString();
+                    break;
+                case "second":
+                    path = config.AppSettings.Settings["2ndPath"].Value.ToString();
+                    break;
+                case "third":
+                    path = config.AppSettings.Settings["3rdPath"].Value.ToString();
+                    break;
+                case "fourth":
+                    path = config.AppSettings.Settings["4thPath"].Value.ToString();
+                    break;
+                case "fifth":
+                    path = config.AppSettings.Settings["5thPath"].Value.ToString();
+                    break;
+                case "sixth":
+                    path = config.AppSettings.Settings["6thPath"].Value.ToString();
+                    break;
+                default:
+
+                    break;
+            }
+            if (path != null)
+            {
+                changePath(path);
+            }
         }
 
         private void textBoxPath_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

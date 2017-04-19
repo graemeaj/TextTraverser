@@ -76,10 +76,13 @@
     </ApplicationDefinition>
     <Compile Include="BuildDate.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="PathsCollection.cs" />
+    <Compile Include="PathsSection.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TextManipulate.cs" />
     <Compile Include="TextSearch.cs" />
     <Compile Include="Truncate.cs" />
+    <Compile Include="Widgets.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

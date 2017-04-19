@@ -68,14 +68,49 @@ namespace TextTraverser
             }
         }
 
-        static public void UpdatePreviousPaths(string newPath, Configuration mainSettings)
+        static public void UpdatePreviousPaths(string newPath, Configuration mainSettings)//this is aids but the code to make this work dymanically is needlessly complicated, so for
+                                                                                          //now this will be hardcoded. i need the config to store lists, but this is not simple
         {
-            mainSettings.AppSettings.Settings["6thPath"].Value = mainSettings.AppSettings.Settings["5thPath"].Value;
-            mainSettings.AppSettings.Settings["5thPath"].Value = mainSettings.AppSettings.Settings["4thPath"].Value;
-            mainSettings.AppSettings.Settings["4thPath"].Value = mainSettings.AppSettings.Settings["3rdPath"].Value;
-            mainSettings.AppSettings.Settings["3rdPath"].Value = mainSettings.AppSettings.Settings["2ndPath"].Value;
-            mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
-            mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            if (mainSettings.AppSettings.Settings["5thPath"].Value == newPath)
+            {
+                mainSettings.AppSettings.Settings["5thPath"].Value = mainSettings.AppSettings.Settings["4thPath"].Value;
+                mainSettings.AppSettings.Settings["4thPath"].Value = mainSettings.AppSettings.Settings["3rdPath"].Value;
+                mainSettings.AppSettings.Settings["3rdPath"].Value = mainSettings.AppSettings.Settings["2ndPath"].Value;
+                mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+            else if (mainSettings.AppSettings.Settings["4thPath"].Value == newPath)
+            {
+                mainSettings.AppSettings.Settings["4thPath"].Value = mainSettings.AppSettings.Settings["3rdPath"].Value;
+                mainSettings.AppSettings.Settings["3rdPath"].Value = mainSettings.AppSettings.Settings["2ndPath"].Value;
+                mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+            else if (mainSettings.AppSettings.Settings["3rdPath"].Value == newPath)
+            {
+                mainSettings.AppSettings.Settings["3rdPath"].Value = mainSettings.AppSettings.Settings["2ndPath"].Value;
+                mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+            else if (mainSettings.AppSettings.Settings["2ndPath"].Value == newPath)
+            {
+                mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+            else if (mainSettings.AppSettings.Settings["previousPath"].Value == newPath)
+            {
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+            else
+            {
+                mainSettings.AppSettings.Settings["6thPath"].Value = mainSettings.AppSettings.Settings["5thPath"].Value;
+                mainSettings.AppSettings.Settings["5thPath"].Value = mainSettings.AppSettings.Settings["4thPath"].Value;
+                mainSettings.AppSettings.Settings["4thPath"].Value = mainSettings.AppSettings.Settings["3rdPath"].Value;
+                mainSettings.AppSettings.Settings["3rdPath"].Value = mainSettings.AppSettings.Settings["2ndPath"].Value;
+                mainSettings.AppSettings.Settings["2ndPath"].Value = mainSettings.AppSettings.Settings["previousPath"].Value;
+                mainSettings.AppSettings.Settings["previousPath"].Value = newPath;
+            }
+
 
             /*System.Console.Write("\n " + mainSettings.AppSettings.Settings["6thPath"].Value);
             System.Console.Write("\n " + mainSettings.AppSettings.Settings["5thPath"].Value);
@@ -86,6 +121,12 @@ namespace TextTraverser
             mainSettings.Save(ConfigurationSaveMode.Modified);
         }
 
+        static public void UpdatePreviousPaths1(string newPath, Configuration mainSettings)
+        {
+            //List<PathsElement> paths = Widgets.PathsWidget.All;
+
+            mainSettings.Save(ConfigurationSaveMode.Modified);
+        }
 
 
 
