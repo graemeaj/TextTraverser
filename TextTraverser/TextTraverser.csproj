@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
@@ -79,6 +80,12 @@
     <Compile Include="PathsCollection.cs" />
     <Compile Include="PathsSection.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TextFileCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextFileCreationForm.Designer.cs">
+      <DependentUpon>TextFileCreationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextManipulate.cs" />
     <Compile Include="TextSearch.cs" />
     <Compile Include="Truncate.cs" />
@@ -113,6 +120,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextFileCreationForm.resx">
+      <DependentUpon>TextFileCreationForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App1.config" />
     <None Include="Properties\Settings.settings">

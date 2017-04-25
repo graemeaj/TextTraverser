@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.81";
+            versionNumber = "0.90";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -168,7 +168,7 @@ namespace TextTraverser
 
 
                             Dispatcher.Invoke((Action)(() => listBox.Items.Add(line))); //invokes the changing of the listbox ui within the thread
-
+                            
                         }
 
                     }
@@ -226,7 +226,12 @@ namespace TextTraverser
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            this.listBox.SelectedItem = "";
+            System.Windows.Controls.TextBox textboxInstance = new System.Windows.Controls.TextBox();
+            textboxInstance.Text = this.listBox.SelectedItem.ToString();
+            textboxInstance.IsReadOnly = true;
+            this.listBox.Items.Add(textboxInstance);
+            System.Console.Write("\nthis has occurred\n");
         }
 
         private void File_Click(object sender, RoutedEventArgs e)
@@ -327,6 +332,22 @@ namespace TextTraverser
                 {
                 }
             }
+        }
+
+        private void listBox_Selected(object sender, RoutedEventArgs e)
+        {
+            this.listBox.SelectedItem = "";
+            System.Windows.Controls.TextBox textboxInstance = new System.Windows.Controls.TextBox();
+            textboxInstance.Text = this.listBox.SelectedItem.ToString();
+            textboxInstance.IsReadOnly = true;
+            this.listBox.Items.Add(textboxInstance);
+            System.Console.Write("\nthis has occurred\n");
+        }
+
+        private void CreateTextFile_Click(object sender, RoutedEventArgs e)
+        {
+            TextFileCreationForm TFCF = new TextFileCreationForm();
+            TFCF.Show();
         }
     }
 }
