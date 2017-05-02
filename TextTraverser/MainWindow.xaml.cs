@@ -39,7 +39,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.901";
+            versionNumber = "0.902";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -338,12 +338,17 @@ namespace TextTraverser
 
         private void listBox_Selected(object sender, RoutedEventArgs e)
         {
+            /*
             this.listBox.SelectedItem = "";
             System.Windows.Controls.TextBox textboxInstance = new System.Windows.Controls.TextBox();
-            textboxInstance.Text = this.listBox.SelectedItem.ToString();
+            if (this.listBox.SelectedItem.ToString() != null)
+            {
+                textboxInstance.Text = this.listBox.SelectedItem.ToString();
+            }
             textboxInstance.IsReadOnly = true;
             this.listBox.Items.Add(textboxInstance);
             System.Console.Write("\nthis has occurred\n");
+            */
         }
 
         private void CreateTextFile_Click(object sender, RoutedEventArgs e)
