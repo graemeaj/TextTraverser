@@ -61,7 +61,8 @@ namespace TextTraverser
             Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
             Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
 
-            
+            textBox.Focus();
+
             this.Loaded += new RoutedEventHandler(windowLoaded);
         }
 
@@ -70,6 +71,8 @@ namespace TextTraverser
             ResetPathText();
             updatePreviousPathsInMenu();
             notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
+
+            textBox.Focus();
 
         }
 
@@ -97,33 +100,35 @@ namespace TextTraverser
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DateTime threadStartingTime = DateTime.Now;
-            latestTime = DateTime.Now;
-            listBox.Items.Clear();
-            listBox.Items.Add("Searching...");
-            listBox.Items.Refresh();
-            
-
-            string searchBarText = textBox.GetLineText(0);
-
-            List<String> searchResults;
-
-
-            BackgroundWorker bw = new BackgroundWorker();
-
-
-            // this allows our worker to report progress during work
-            bw.WorkerReportsProgress = true;
-
-            // what to do in the background thread
-            bw.DoWork += new DoWorkEventHandler(
-            delegate (object o, DoWorkEventArgs args)
+            if (listBox != null)
             {
-                lock (listBox)
+                DateTime threadStartingTime = DateTime.Now;
+                latestTime = DateTime.Now;
+                listBox.Items.Clear();
+                listBox.Items.Add("Searching...");
+                listBox.Items.Refresh();
+
+
+                string searchBarText = textBox.GetLineText(0);
+
+                List<String> searchResults;
+
+
+                BackgroundWorker bw = new BackgroundWorker();
+
+
+                // this allows our worker to report progress during work
+                bw.WorkerReportsProgress = true;
+
+                // what to do in the background thread
+                bw.DoWork += new DoWorkEventHandler(
+                delegate (object o, DoWorkEventArgs args)
                 {
-                    if (searchBarText != "")
+                    lock (listBox)
                     {
-                        searchResults = searcher.ListSearch(searchBarText, listBox, matchesLabel);//single search as backup
+                        if (searchBarText != "")
+                        {
+                            searchResults = searcher.ListSearch(searchBarText, listBox, matchesLabel);//single search as backup
 
 
                         Console.WriteLine(searchResults.Count + " items in the list");
@@ -131,58 +136,58 @@ namespace TextTraverser
                         {
                             listBox.Items.RemoveAt(0);
                         }*/
-                        Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
+                            Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
 
-                        args.Result = searchResults;
+                            args.Result = searchResults;
                         //matchesLabel.Content = searchResults.Count;
                     }
-                    else
-                    {
-                        Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
-                        Dispatcher.Invoke((Action)(() => matchesLabel.Content = searcher.textList.Count));
+                        else
+                        {
+                            Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
+                            Dispatcher.Invoke((Action)(() => matchesLabel.Content = searcher.textList.Count));
+                        }
                     }
-                }
-                
-            });
 
-            // what to do when progress changed (update the progress bar for example)
-            bw.ProgressChanged += new ProgressChangedEventHandler(
-            delegate (object o, ProgressChangedEventArgs args)
-            {
+                });
+
+                // what to do when progress changed (update the progress bar for example)
+                bw.ProgressChanged += new ProgressChangedEventHandler(
+                delegate (object o, ProgressChangedEventArgs args)
+                {
                 //listBox.Items.Add("Searching...");
             });
 
-            // what to do when worker completes its task (notify the user)
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
-            delegate (object o, RunWorkerCompletedEventArgs args)
-            {
-                Console.WriteLine(latestTime.Millisecond + "is the latest time \n" + threadStartingTime.Millisecond + " is the thread starting time");
-                if (latestTime == threadStartingTime)
+                // what to do when worker completes its task (notify the user)
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
+                delegate (object o, RunWorkerCompletedEventArgs args)
                 {
-                    List<String> completedSearchResults = args.Result as List<String>;
-                    if (completedSearchResults != null)
+                    Console.WriteLine(latestTime.Millisecond + "is the latest time \n" + threadStartingTime.Millisecond + " is the thread starting time");
+                    if (latestTime == threadStartingTime)
                     {
-                        Dispatcher.Invoke((Action)(() => matchesLabel.Content = completedSearchResults.Count()));//Console.WriteLine(line.Count());
-                        foreach (string line in completedSearchResults)
+                        List<String> completedSearchResults = args.Result as List<String>;
+                        if (completedSearchResults != null)
                         {
+                            Dispatcher.Invoke((Action)(() => matchesLabel.Content = completedSearchResults.Count()));//Console.WriteLine(line.Count());
+                        foreach (string line in completedSearchResults)
+                            {
 
 
-                            Dispatcher.Invoke((Action)(() => listBox.Items.Add(line))); //invokes the changing of the listbox ui within the thread
-                            
+                                Dispatcher.Invoke((Action)(() => listBox.Items.Add(line))); //invokes the changing of the listbox ui within the thread
+
                         }
 
+                        }
+                        else
+                        {
+                            Dispatcher.Invoke((Action)(() => matchesLabel.Content = searcher.textList.Count));
+                        }
                     }
-                    else
-                    {
-                        Dispatcher.Invoke((Action)(() => matchesLabel.Content = searcher.textList.Count));
-                    }
-                }
 
-            });
-        
-            bw.RunWorkerAsync();
+                });
 
+                bw.RunWorkerAsync();
 
+            }
 
         }
 

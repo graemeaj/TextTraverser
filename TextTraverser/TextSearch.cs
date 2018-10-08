@@ -39,7 +39,7 @@ namespace TextTraverser
             }
             else
             {
-                MessageBox.Show("no such file called \"" + textFileLocation + "\"");//if the load fails, report it
+                MessageBox.Show("No such file called \"" + textFileLocation + "\"", "Missing Text Search File", MessageBoxButton.OK, MessageBoxImage.Warning);//if the load fails, report it
             }
             
             return text;//returns the payload
@@ -105,7 +105,7 @@ namespace TextTraverser
             {
                 System.Diagnostics.Debug.Write(query);
                 System.Diagnostics.Debug.Write("\nfailed");
-                MessageBox.Show("no such file called \"" + query + "\"");
+                MessageBox.Show("no such file called \"" + query + "\"", "No Text Search File", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
         }

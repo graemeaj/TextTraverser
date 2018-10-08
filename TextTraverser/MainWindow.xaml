@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextTraverser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" MinHeight="300" MinWidth="370"
+        Title="TextTraverser" Height="350" Width="525" MinHeight="300" MinWidth="370"
         
         SizeChanged="recordNewSize"
-        LocationChanged="recordNewWindowLocation"
+        LocationChanged="recordNewWindowLocation" FontFamily="Calibri" FontWeight="Bold" WindowStyle="ThreeDBorderWindow"
         >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,11 +19,11 @@
             <RowDefinition Height="62"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="63,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Cursor="IBeam" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25"/>
         <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="100,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Button x:Name="button" Content="refresh path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="93" Height="23" Click="button_Click"/>
-        <Label x:Name="label" Content="lines" Margin="0,57,2,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="58" Grid.Column="1" Height="26"/>
+        <Button x:Name="button" Content="Refresh Path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="93" Height="23" Click="button_Click"/>
+        <Label x:Name="label" Content="Lines" Margin="0,57,2,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="58" Grid.Column="1" Height="26"/>
         <Label x:Name="matchesLabel" Content="0" Margin="0,57,56,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="70" Grid.Column="1" Height="26"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="24" Margin="2,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="515" Grid.ColumnSpan="2"/>
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top"  Grid.ColumnSpan="2">
