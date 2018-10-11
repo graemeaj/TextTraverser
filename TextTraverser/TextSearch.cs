@@ -21,7 +21,7 @@ namespace TextTraverser
 
         public object New { get; private set; }
 
-        public String getText(String textFileLocation, Configuration config)//method to aquire text content and put it into a string
+        public String getText(String textFileLocation, Configuration config, Label notificationLabel)//method to aquire text content and put it into a string
         {
             
             if(System.IO.File.Exists(textFileLocation) == true)//if the file exists
@@ -35,11 +35,12 @@ namespace TextTraverser
                 EnlistString(text);//put the string into an organised list
 
                 Config.UpdatePreviousPaths(textFileLocation, config);
-                
+                notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
             }
             else
             {
                 MessageBox.Show("No such file called \"" + textFileLocation + "\"", "Missing Text Search File", MessageBoxButton.OK, MessageBoxImage.Warning);//if the load fails, report it
+                notificationLabel.Content = "Failure. Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has failed to load at " + DateTime.Now + " because it does not exist";
             }
             
             return text;//returns the payload

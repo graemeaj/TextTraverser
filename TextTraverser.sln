@@ -7,8 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextTraverser", "TextTraver
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{908C7A92-1C2D-4422-9677-DAE510196D4B}"
 	ProjectSection(SolutionItems) = preProject
+		TextTraverser\BUTTON.ogg = TextTraverser\BUTTON.ogg
 		TextTraverser\Eye.png = TextTraverser\Eye.png
 		TextTraverser\Eye2.png = TextTraverser\Eye2.png
+		TextTraverser\tadupd02.wav = TextTraverser\tadupd02.wav
 	EndProjectSection
 EndProject
 Global

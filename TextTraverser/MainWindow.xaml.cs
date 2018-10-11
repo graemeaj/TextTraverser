@@ -2,22 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Reflection;
-using System.Diagnostics;
 using System.IO;
 
 namespace TextTraverser
@@ -39,7 +29,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.902";
+            versionNumber = "0.911";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -48,7 +38,7 @@ namespace TextTraverser
             latestTime = DateTime.Now;
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             settings = new Config();
-            searcher.getText(config.AppSettings.Settings["previousPath"].Value, config);
+            searcher.getText(config.AppSettings.Settings["previousPath"].Value, config, notificationLabel);
             System.Windows.Application.Current.MainWindow.Height = Convert.ToDouble(config.AppSettings.Settings["windowHeight"].Value);
             System.Windows.Application.Current.MainWindow.Width = Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value); 
 
@@ -61,6 +51,8 @@ namespace TextTraverser
             Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
             Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
 
+            //listBox.KeyDown += HandleKeyUpSelected;
+
             textBox.Focus();
 
             this.Loaded += new RoutedEventHandler(windowLoaded);
@@ -70,7 +62,8 @@ namespace TextTraverser
         {
             ResetPathText();
             updatePreviousPathsInMenu();
-            notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
+
+            //notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
 
             textBox.Focus();
 
@@ -205,21 +198,24 @@ namespace TextTraverser
             }
         }
 
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string pathBarText = textBoxPath.GetLineText(0);
             changePath(pathBarText);
+
         }
 
         private void changePath(string s)
         {
             if (s != null && System.IO.File.Exists(s) == true)
             {
-                searcher.getText(s, config);
+                searcher.getText(s, config, notificationLabel);
                 ResetPathText();
                 textBox.Text = "";
                 notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded at " + DateTime.Now;
                 updatePreviousPathsInMenu();
+
             }
             else
             {
@@ -360,6 +356,34 @@ namespace TextTraverser
         {
             TextFileCreationForm TFCF = new TextFileCreationForm();
             TFCF.Show();
+        }
+
+
+        private void listBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (this.listBox.SelectedItem != null)//checks if the listbox item selected is not null
+                {
+                    string path = this.listBox.SelectedItem.ToString();//makes value into sting
+                    path = TextManipulate.CleanUpString(path);//cleans up the string with a custom function to ensure the path will read
+                    searcher.OpenFile(path);//opens path
+                }
+                else
+                {
+                    //if the clicked listbox contains nothing
+                }
+            }
+        }
+
+        private void textBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Down)
+            {
+                listBox.Focus();
+                //you might need to select one value to allow arrow keys
+                listBox.SelectedIndex = 0;
+            }
         }
     }
 }

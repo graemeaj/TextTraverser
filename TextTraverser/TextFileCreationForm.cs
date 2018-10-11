@@ -26,6 +26,7 @@ namespace TextTraverser
 
         private void button1_Click(object sender, EventArgs e)//create new text file
         {
+            Process CMD = new Process();
             string extention = textBox1.Text;
             string path = textBox2.Text;
             string fileName = textBox3.Text;
@@ -37,7 +38,15 @@ namespace TextTraverser
 
             arguments = "/C dir " + path + "*." + extention + " /b /on /s > " + currentDirectory + fileName + ".txt";//concatenating the argument to be passed to cmd
 
-            Process.Start("cmd.exe", arguments);
+            CMD.StartInfo.UseShellExecute = true;
+            CMD.StartInfo.FileName = "cmd.exe";
+            CMD.StartInfo.CreateNoWindow = true;
+            CMD.StartInfo.Arguments = arguments;
+            CMD.Start();
+            //CMD.Start("cmd.exe", arguments);
+            CMD.WaitForExit();
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tadupd02);
+            player.Play();
             Console.WriteLine(arguments);
             this.Close();
 
