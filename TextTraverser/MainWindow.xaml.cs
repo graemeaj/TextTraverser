@@ -29,7 +29,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.911";
+            versionNumber = "0.915";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -206,7 +206,7 @@ namespace TextTraverser
 
         }
 
-        private void changePath(string s)
+        public void changePath(string s)
         {
             if (s != null && System.IO.File.Exists(s) == true)
             {
@@ -354,7 +354,7 @@ namespace TextTraverser
 
         private void CreateTextFile_Click(object sender, RoutedEventArgs e)
         {
-            TextFileCreationForm TFCF = new TextFileCreationForm();
+            TextFileCreationForm TFCF = new TextFileCreationForm(this);
             TFCF.Show();
         }
 

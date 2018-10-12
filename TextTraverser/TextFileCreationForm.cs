@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace TextTraverser
 {
     public partial class TextFileCreationForm : Form
     {
-        public TextFileCreationForm()
+        MainWindow main;
+
+        public TextFileCreationForm(MainWindow masterScreen)
         {
             InitializeComponent();
+            main = masterScreen;
         }
 
         private void TextFileCreationForm_Load(object sender, EventArgs e)
@@ -24,10 +28,17 @@ namespace TextTraverser
             textBox2.Text = "C:\\";
         }
 
-        private void button1_Click(object sender, EventArgs e)//create new text file
+        private void button1_Click(object sender, EventArgs e)//create new text file based on the text field inputs
+        {
+            GenerateTextFile();
+            this.Close();
+
+        }
+
+        private void GenerateTextFile()
         {
             Process CMD = new Process();
-            string extention = textBox1.Text;
+            string extention = textBox1.Text;//gets text
             string path = textBox2.Text;
             string fileName = textBox3.Text;
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;//finds the current base directory of the program
@@ -44,12 +55,17 @@ namespace TextTraverser
             CMD.StartInfo.Arguments = arguments;
             CMD.Start();
             //CMD.Start("cmd.exe", arguments);
-            CMD.WaitForExit();
+            CMD.WaitForExit();//waits for cmd to finish
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tadupd02);
             player.Play();
-            Console.WriteLine(arguments);
-            this.Close();
-
+            try
+            {
+                main.changePath(currentDirectory + fileName + ".txt");
+            }
+            catch (IOException)
+            {
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
