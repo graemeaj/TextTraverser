@@ -247,7 +247,7 @@ namespace TextTraverser
             string aboutInfo;
             aboutInfo = "V" + versionNumber + " TextTraverser\n";
             aboutInfo += "current build time: " + buildTime + "\n";
-            aboutInfo += "Author: Graeme Judkins\n\ngraeme@judkins.ca\n\n©2017";
+            aboutInfo += "Author: Graeme Judkins\n\ngraeme@judkins.ca\n\n©2018";
             System.Windows.Forms.MessageBox.Show(aboutInfo);
         }
 
