@@ -121,6 +121,9 @@
   <data name="BUTTON" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\BUTTON.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="FSEX300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\FSEX300.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tadupd02" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\tadupd02.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

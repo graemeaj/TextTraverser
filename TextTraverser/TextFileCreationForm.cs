@@ -26,6 +26,7 @@ namespace TextTraverser
         private void TextFileCreationForm_Load(object sender, EventArgs e)
         {
             textBox2.Text = "C:\\";
+            label1.Font = new Font("/TextTraverser;component/#Fixedsys Excelsior 3.01", 16.0f);
         }
 
         private void button1_Click(object sender, EventArgs e)//create new text file based on the text field inputs
@@ -84,6 +85,11 @@ namespace TextTraverser
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

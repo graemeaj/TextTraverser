@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Reflection;
 using System.IO;
+using System.Drawing;
+using System.Windows.Media;
 
 namespace TextTraverser
 {
@@ -25,11 +27,13 @@ namespace TextTraverser
         string versionNumber;
         string buildTime;
 
+        private SolidColorBrush buttonBrush;
+
         public MainWindow()
         {
 
             //meta information
-            versionNumber = "0.915";
+            versionNumber = "0.920";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -45,8 +49,6 @@ namespace TextTraverser
             System.Console.Write("the height is " + Convert.ToDouble(config.AppSettings.Settings["windowHeight"].Value));
             System.Console.Write("the width is " + Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value));
 
-
-
             System.Windows.Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
             Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
             Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
@@ -58,10 +60,16 @@ namespace TextTraverser
             this.Loaded += new RoutedEventHandler(windowLoaded);
         }
 
+
+
         public void windowLoaded(object sender, RoutedEventArgs e)
         {
             ResetPathText();
             updatePreviousPathsInMenu();
+
+            SetValuesOnSubItems(this.File.Items.OfType<ToolStripMenuItem>().ToList());
+
+            buttonBrush = (SolidColorBrush)button.Background;
 
             //notificationLabel.Content = "Success! Path \"" + config.AppSettings.Settings["previousPath"].Value + "\" has been loaded at " + DateTime.Now;
 
@@ -69,7 +77,20 @@ namespace TextTraverser
 
         }
 
-        public void ResetPathText()
+        private void SetValuesOnSubItems(List<ToolStripMenuItem> items)
+        {
+            items.ForEach(item =>
+            {
+                var dropdown = (ToolStripDropDownMenu)item.DropDown;
+                if (dropdown != null)
+                {
+                    dropdown.ShowImageMargin = false;
+                    SetValuesOnSubItems(item.DropDownItems.OfType<ToolStripMenuItem>().ToList());
+                }
+            });
+        }
+
+        public void ResetPathText()//i think this just gets the last saved path
         {
             if (config.AppSettings.Settings["previousPath"].Value != null)
             {
@@ -77,6 +98,7 @@ namespace TextTraverser
                 textBoxPath.Text = config.AppSettings.Settings["previousPath"].Value.ToString();
                 System.Console.Write("\n" + config.AppSettings.Settings["previousPath"].Value.ToString() + " is the previous path");
                 System.Media.SystemSounds.Beep.Play();
+                Search();
             }
         }
 
@@ -92,6 +114,11 @@ namespace TextTraverser
         }
 
         public void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search();
+        }
+
+        public void Search()
         {
             if (listBox != null)
             {
@@ -124,16 +151,16 @@ namespace TextTraverser
                             searchResults = searcher.ListSearch(searchBarText, listBox, matchesLabel);//single search as backup
 
 
-                        Console.WriteLine(searchResults.Count + " items in the list");
-                        /*if (listBox.Items != null)
-                        {
-                            listBox.Items.RemoveAt(0);
-                        }*/
+                            Console.WriteLine(searchResults.Count + " items in the list");
+                            /*if (listBox.Items != null)
+                            {
+                                listBox.Items.RemoveAt(0);
+                            }*/
                             Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
 
                             args.Result = searchResults;
-                        //matchesLabel.Content = searchResults.Count;
-                    }
+                            //matchesLabel.Content = searchResults.Count;
+                        }
                         else
                         {
                             Dispatcher.Invoke((Action)(() => listBox.Items.Clear()));
@@ -147,8 +174,8 @@ namespace TextTraverser
                 bw.ProgressChanged += new ProgressChangedEventHandler(
                 delegate (object o, ProgressChangedEventArgs args)
                 {
-                //listBox.Items.Add("Searching...");
-            });
+                    //listBox.Items.Add("Searching...");
+                });
 
                 // what to do when worker completes its task (notify the user)
                 bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
@@ -161,13 +188,13 @@ namespace TextTraverser
                         if (completedSearchResults != null)
                         {
                             Dispatcher.Invoke((Action)(() => matchesLabel.Content = completedSearchResults.Count()));//Console.WriteLine(line.Count());
-                        foreach (string line in completedSearchResults)
+                            foreach (string line in completedSearchResults)
                             {
 
 
                                 Dispatcher.Invoke((Action)(() => listBox.Items.Add(line))); //invokes the changing of the listbox ui within the thread
 
-                        }
+                            }
 
                         }
                         else
@@ -181,7 +208,6 @@ namespace TextTraverser
                 bw.RunWorkerAsync();
 
             }
-
         }
 
         public void list_item_clicked(object sender, RoutedEventArgs e)
@@ -203,7 +229,6 @@ namespace TextTraverser
         {
             string pathBarText = textBoxPath.GetLineText(0);
             changePath(pathBarText);
-
         }
 
         public void changePath(string s)
@@ -246,9 +271,12 @@ namespace TextTraverser
         {
             string aboutInfo;
             aboutInfo = "V" + versionNumber + " TextTraverser\n";
-            aboutInfo += "current build time: " + buildTime + "\n";
+            aboutInfo += "Built on: " + buildTime + "\n";
             aboutInfo += "Author: Graeme Judkins\n\ngraeme@judkins.ca\n\n©2018";
-            System.Windows.Forms.MessageBox.Show(aboutInfo);
+            //System.Windows.Forms.MessageBox.Show(aboutInfo);
+            Window1 about = new Window1(aboutInfo);
+            about.Show();
+
         }
 
         private void File_Associations_Click(object sender, RoutedEventArgs e)
@@ -384,6 +412,19 @@ namespace TextTraverser
                 //you might need to select one value to allow arrow keys
                 listBox.SelectedIndex = 0;
             }
+        }
+
+        private void button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            SolidColorBrush redBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
+
+            this.button.Background = redBrush;
+            this.button.InvalidateVisual();
+        }
+
+        private void button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.button.Background = buttonBrush;
         }
     }
 }

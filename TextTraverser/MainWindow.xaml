@@ -10,6 +10,7 @@
         SizeChanged="recordNewSize"
         LocationChanged="recordNewWindowLocation" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Background="#FFAC1F1F" Foreground="#FFF51212" BorderBrush="#FF9B3E3E" WindowStyle="ThreeDBorderWindow" OpacityMask="#FF743C3C"
         >
+
     <Grid Background="#FF222227">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="272*"/>
@@ -20,30 +21,31 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="textBox_KeyUp" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="68,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Cursor="IBeam" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA"/>
-        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#FFCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="True"/>
+        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#EDCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="True"/>
         <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="113,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" SelectionBrush="#FF5496CB"/>
-        <Button x:Name="button" Content="Refresh Path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="106" Height="23" Click="button_Click" Foreground="#FFE6E6EA" BorderBrush="#FF6366AC">
+        <Button x:Name="button" Content="Refresh Path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="106" Height="23" Click="button_Click" Foreground="#FFE6E6EA" BorderBrush="#FF6366AC" MouseEnter="button_MouseEnter" MouseLeave="button_MouseLeave">
             <Button.Background>
                 <SolidColorBrush Color="#FF505066"/>
             </Button.Background>
+
         </Button>
         <Label x:Name="label" Content="Lines" Margin="0,57,2,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="58" Grid.Column="1" Height="26" Foreground="#FFE6E6EA"/>
         <Label x:Name="matchesLabel" Content="0" Margin="0,57,56,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="70" Grid.Column="1" Height="26" Foreground="#FFE6E6EA"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="24" Margin="2,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="515" Grid.ColumnSpan="2"/>
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top"  Grid.ColumnSpan="2" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Background="#FF464659" Foreground="#FFA8A8AA">
-            <MenuItem x:Name="File" Header="File" Click="File_Click" Height="24" Foreground="#FFA8A8AA">
+            <MenuItem x:Name="File"  Header="File" Click="File_Click" Height="24" Foreground="#FFA8A8AA">
 
-                <MenuItem x:Name="Options" Header="Options" Foreground="#FF222227" HorizontalAlignment="Left" Width="190"/>
-                <MenuItem x:Name="RecentFiles" Header="Recent Files" Foreground="#FF222227" HorizontalAlignment="Left" Width="196" Click="File_Associations_Click" Margin="0,0,0,0">
-                    <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
-                    <MenuItem x:Name="second" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
-                    <MenuItem x:Name="third" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
-                    <MenuItem x:Name="fourth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
-                    <MenuItem x:Name="fifth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
-                    <MenuItem x:Name="sixth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="300"/>
+                <MenuItem x:Name="Options" Header="Options" Foreground="#FF222227" HorizontalAlignment="Left" Width="201" Margin="0,0,-1,0"/>
+                <MenuItem x:Name="RecentFiles" Header="Recent Files" Foreground="#FF222227" HorizontalAlignment="Left" Width="201" Click="File_Associations_Click" Margin="0,0,-1,0">
+                    <MenuItem x:Name="mostRecent" Header="Most Recent" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330" Margin="0,0,-30,0"/>
+                    <MenuItem x:Name="second" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330"/>
+                    <MenuItem x:Name="third" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330"/>
+                    <MenuItem x:Name="fourth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330"/>
+                    <MenuItem x:Name="fifth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330"/>
+                    <MenuItem x:Name="sixth" Header="--none--" Click="PreviousPathsClick" HorizontalAlignment="left" Foreground="#FF222227" Width="330"/>
                 </MenuItem>
                 <MenuItem x:Name="File_Associations" Header="File Associations" Foreground="#FF222227" HorizontalAlignment="Left" Width="241" Click="File_Associations_Click" Margin="0,0,-41,0"/>
-                <MenuItem x:Name="Exit" Header="Exit" Foreground="#FF222227" HorizontalAlignment="Left" Width="140" Click="Exit_Click"/>
+                <MenuItem x:Name="Exit" Header="Exit" Foreground="#FF222227" HorizontalAlignment="Left" Width="200" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem x:Name="about" Header="About..." Click="About_Click"></MenuItem>
             <MenuItem x:Name="CreateTextFile" Header="Create text file..." Click="CreateTextFile_Click"></MenuItem>
@@ -51,5 +53,31 @@
         <Label x:Name="label1" Content="Search:" HorizontalAlignment="Left" Margin="0,54,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFE6E6EA"/>
         <Label x:Name="notificationLabel" Content="hello" Margin="2,0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Foreground="#FFE6E6EA"/>
         <Button x:Name="button1" Content="..." Grid.Column="1" Margin="0,29,2,10" Click="button1_Click" HorizontalAlignment="Right" Width="33" Background="#FF505066" Foreground="#FFE6E6EA" BorderBrush="#FF6366AC"/>
+        <Image x:Name="image" Margin="2,26" Source="Eye3.ico" Panel.ZIndex="-1" RenderTransformOrigin="-1.607,1.013" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
+    <!--<WindowResources> //<Style="{DynamicResource MenuItemStyle1}"
+        <Style x:Key="MenuItemStyle1" TargetType="{x:Type MenuItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+            <Style.Triggers>
+                <Trigger Property="Role" Value="TopLevelHeader">
+                    <Setter Property="Padding" Value="7,2,8,3"/>
+                    <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+                </Trigger>
+                <Trigger Property="Role" Value="TopLevelItem">
+                    <Setter Property="Padding" Value="7,2,8,3"/>
+                    <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+                </Trigger>
+                <Trigger Property="Role" Value="SubmenuHeader">
+                    <Setter Property="Padding" Value="2,3,2,3"/>
+                    <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+                </Trigger>
+                <Trigger Property="Role" Value="SubmenuItem">
+                    <Setter Property="Padding" Value="2,3,2,3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </WindowResources>-->
 </Window>
