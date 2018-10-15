@@ -246,10 +246,10 @@ namespace TextTraverser
             {
                 searcher.getText(s, config, notificationLabel);
                 ResetPathText();
-                textBox.Text = "";
+                //textBox.Text = "";
                 notificationLabel.Content = "Success! Path \"" + s + "\" has been loaded at " + DateTime.Now;
                 updatePreviousPathsInMenu();
-
+                Search();
             }
             else
             {
