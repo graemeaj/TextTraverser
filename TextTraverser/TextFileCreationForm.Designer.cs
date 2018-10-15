@@ -46,6 +46,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
+            this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -54,6 +55,7 @@
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(102)))));
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
+            this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -61,12 +63,14 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.UseCompatibleTextRendering = true;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.label2.UseCompatibleTextRendering = true;
             // 
             // textBox1
             // 
@@ -86,6 +90,7 @@
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.label4.UseCompatibleTextRendering = true;
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBox3
@@ -99,6 +104,7 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.label3.UseCompatibleTextRendering = true;
             // 
             // TextFileCreationForm
             // 

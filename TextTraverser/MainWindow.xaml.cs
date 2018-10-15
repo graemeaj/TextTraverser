@@ -33,7 +33,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.920";
+            versionNumber = "0.925";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -217,6 +217,8 @@ namespace TextTraverser
                 string path = this.listBox.SelectedItem.ToString();//makes value into sting
                 path = TextManipulate.CleanUpString(path);//cleans up the string with a custom function to ensure the path will read
                 searcher.OpenFile(path);//opens path
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
             }
             else
             {
@@ -226,6 +228,13 @@ namespace TextTraverser
 
 
         private void button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+            player.Play();
+            Refresh();
+        }
+
+        private void Refresh()
         {
             string pathBarText = textBoxPath.GetLineText(0);
             changePath(pathBarText);
@@ -269,6 +278,8 @@ namespace TextTraverser
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+            player.Play();
             string aboutInfo;
             aboutInfo = "V" + versionNumber + " TextTraverser\n";
             aboutInfo += "Built on: " + buildTime + "\n";
@@ -281,7 +292,8 @@ namespace TextTraverser
 
         private void File_Associations_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+            player.Play();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -336,6 +348,8 @@ namespace TextTraverser
             if (path != null)
             {
                 changePath(path);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
             }
         }
 
@@ -345,11 +359,15 @@ namespace TextTraverser
             {
                 string pathBarText = textBoxPath.GetLineText(0);
                 changePath(pathBarText);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
             }
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+            player.Play();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
             if (result == System.Windows.Forms.DialogResult.OK) // Test result.
@@ -362,6 +380,11 @@ namespace TextTraverser
                 catch (IOException)
                 {
                 }
+            }
+            else
+            {
+                player = new System.Media.SoundPlayer(Properties.Resources.BUZZ);
+                player.Play();
             }
         }
 
@@ -382,8 +405,13 @@ namespace TextTraverser
 
         private void CreateTextFile_Click(object sender, RoutedEventArgs e)
         {
-            TextFileCreationForm TFCF = new TextFileCreationForm(this);
+            //TextFileCreationForm TFCF = new TextFileCreationForm(this);
+            //TFCF.Show();
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+            player.Play();
+            Window2 TFCF = new Window2(this);
             TFCF.Show();
+
         }
 
 
@@ -393,6 +421,8 @@ namespace TextTraverser
             {
                 if (this.listBox.SelectedItem != null)//checks if the listbox item selected is not null
                 {
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                    player.Play();
                     string path = this.listBox.SelectedItem.ToString();//makes value into sting
                     path = TextManipulate.CleanUpString(path);//cleans up the string with a custom function to ensure the path will read
                     searcher.OpenFile(path);//opens path
@@ -425,6 +455,14 @@ namespace TextTraverser
         private void button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             this.button.Background = buttonBrush;
+        }
+
+        private void textBoxPath_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            /*if (e.Key == Key.Enter)
+            {
+                Refresh();
+            }*/
         }
     }
 }

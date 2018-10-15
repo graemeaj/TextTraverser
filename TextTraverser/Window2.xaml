@@ -1,0 +1,21 @@
+﻿<Window x:Class="TextTraverser.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextTraverser"
+        mc:Ignorable="d"
+        Title="Create Search File" Height="196.46" Width="444.248" ResizeMode="NoResize" Opacity="0.95" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Icon="Eye3.ico" Background="{x:Null}" WindowStyle="ThreeDBorderWindow">
+    <Grid Background="#FF222227">
+        <Label x:Name="label" Content="File Extension To Be Searched: " HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" Width="257" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE5E6EA"/>
+        <Label x:Name="label2" Content="Search Path Head: " HorizontalAlignment="Left" Margin="28,41,0,0" VerticalAlignment="Top" Width="257" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE5E6EA"/>
+        <Label x:Name="label2_Copy" Content="File Name: " HorizontalAlignment="Left" Margin="28,72,0,0" VerticalAlignment="Top" Width="98" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE5E6EA"/>
+        <Label x:Name="label2_Copy1" Content=".txt" HorizontalAlignment="Left" Margin="371,72,0,0" VerticalAlignment="Top" Width="98" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE5E6EA"/>
+        <Button x:Name="button" Click="button_Click" Content="CANCEL" HorizontalAlignment="Left" Margin="28,118,0,0" VerticalAlignment="Top" Width="100" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16"/>
+        <Button x:Name="button1" Click="button1_Click" Content="CREATE FILE" HorizontalAlignment="Left" Margin="308,118,0,0" VerticalAlignment="Top" Width="100" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="290,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Background="#FF373746" Foreground="#FFE6E6EA" VerticalContentAlignment="Center" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="189,44,0,0" TextWrapping="Wrap" Text="C:\" VerticalAlignment="Top" Width="176" Background="#FF373746" Foreground="#FFE6E6EA" VerticalContentAlignment="Center" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="131,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" Background="#FF373746" Foreground="#FFE6E6EA" VerticalContentAlignment="Center" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16"/>
+
+    </Grid>
+</Window>

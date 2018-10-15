@@ -10,12 +10,15 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace TextTraverser
 {
     public partial class TextFileCreationForm : Form
     {
         MainWindow main;
+        Font fixedSys;
 
         public TextFileCreationForm(MainWindow masterScreen)
         {
@@ -26,7 +29,43 @@ namespace TextTraverser
         private void TextFileCreationForm_Load(object sender, EventArgs e)
         {
             textBox2.Text = "C:\\";
-            label1.Font = new Font("/TextTraverser;component/#Fixedsys Excelsior 3.01", 16.0f);
+            fixedSys = new Font(InitializeFont().Families[0], 16.0f);
+
+            label1.Font = fixedSys;
+            label2.Font = fixedSys;
+            label3.Font = fixedSys;
+            label4.Font = fixedSys;
+            //textBox1.Font = fixedSys;
+            //textBox2.Font = fixedSys;
+            //textBox3.Font = fixedSys;
+            button1.Font = fixedSys;
+            button2.Font = fixedSys;
+        }
+
+        PrivateFontCollection InitializeFont()
+        {
+            //Create your private font collection object.
+            PrivateFontCollection pfc = new PrivateFontCollection();
+
+            //Select your font from the resources.
+            //My font here is "Digireu.ttf"
+            int fontLength = Properties.Resources.FSEX300.Length;
+
+            // create a buffer to read in to
+            byte[] fontdata = Properties.Resources.FSEX300;
+
+            // create an unsafe memory block for the font data
+            System.IntPtr data = Marshal.AllocCoTaskMem(fontLength);
+
+            // copy the bytes to the unsafe memory block
+            Marshal.Copy(fontdata, 0, data, fontLength);
+
+            // pass the font to the font collection
+            pfc.AddMemoryFont(data, fontLength);
+
+            Marshal.FreeCoTaskMem(data);
+
+            return pfc;
         }
 
         private void button1_Click(object sender, EventArgs e)//create new text file based on the text field inputs

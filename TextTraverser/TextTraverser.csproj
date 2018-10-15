@@ -83,6 +83,11 @@
     <Compile Include="Config.cs" />
     <Compile Include="PathsCollection.cs" />
     <Compile Include="PathsSection.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TextFileCreationForm.cs">
       <SubType>Form</SubType>
@@ -96,6 +101,9 @@
     <Compile Include="Widgets.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -113,15 +121,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,7 +146,6 @@
       <DependentUpon>TextFileCreationForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App1.config" />
-    <None Include="BUTTON.ogg" />
     <Resource Include="FSEX300.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -171,6 +177,8 @@
     <Resource Include="Eye3.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BUTTON.WAV" />
+    <Content Include="BUZZ.WAV" />
     <Content Include="tadupd02.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

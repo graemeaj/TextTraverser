@@ -61,12 +61,20 @@ namespace TextTraverser.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static byte[] BUTTON {
+        internal static System.IO.UnmanagedMemoryStream BUTTON1 {
             get {
-                object obj = ResourceManager.GetObject("BUTTON", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("BUTTON1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BUZZ {
+            get {
+                return ResourceManager.GetStream("BUZZ", resourceCulture);
             }
         }
         
