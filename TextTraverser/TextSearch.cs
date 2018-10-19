@@ -101,12 +101,15 @@ namespace TextTraverser
                 System.Diagnostics.Debug.Write(query);
                 System.Diagnostics.Debug.Write("\nsuccess");
                 System.Diagnostics.Process.Start(query);
+
             }
             else
             {
                 System.Diagnostics.Debug.Write(query);
                 System.Diagnostics.Debug.Write("\nfailed");
-                MessageBox.Show("no such file called \"" + query + "\"", "No Text Search File", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUZZ);
+                player.Play();
+                MessageBox.Show("Failure! No such file called \"" + query + "\"", "No Text Search File", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
         }

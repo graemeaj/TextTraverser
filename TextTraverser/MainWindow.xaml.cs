@@ -33,7 +33,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.925";
+            versionNumber = "0.940";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -381,10 +381,10 @@ namespace TextTraverser
                 {
                 }
             }
-            else
+            else//if user closes the prompt
             {
-                player = new System.Media.SoundPlayer(Properties.Resources.BUZZ);
-                player.Play();
+                //player = new System.Media.SoundPlayer(Properties.Resources.BUZZ);
+                //player.Play();
             }
         }
 
@@ -463,6 +463,58 @@ namespace TextTraverser
             {
                 Refresh();
             }*/
+        }
+
+        private void listBox_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        public void CopyStringToClipBoard(String path)
+        {
+            System.Windows.Clipboard.SetData(System.Windows.DataFormats.Text, path);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)//Copy File Path
+        {
+            if (listBox.SelectedItem.ToString() != "")
+            {
+                String path = listBox.SelectedItem.ToString();
+                path = path.Replace("\r", "");
+                CopyStringToClipBoard(path);
+                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
+            }
+
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)//Copy File Name Only
+        {
+            if (listBox.SelectedItem.ToString() != "")
+            {
+                string path = @listBox.SelectedItem.ToString();
+                path = path.Replace("\r", "");
+                path = Path.GetFileNameWithoutExtension(path);
+                CopyStringToClipBoard(path);
+                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
+            }
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)//Copy File Name And Extension
+        {
+            if (listBox.SelectedItem.ToString() != "")
+            {
+                string path = listBox.SelectedItem.ToString();
+                path = path.Replace("\r", "");
+                path = Path.GetFileName(path);
+                CopyStringToClipBoard(path);
+                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                player.Play();
+            }
         }
     }
 }
