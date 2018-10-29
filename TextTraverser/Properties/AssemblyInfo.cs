@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TextTraverser")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Quickly find files and open them")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Graeme Judkins")]
 [assembly: AssemblyProduct("TextTraverser")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("Graeme Judkins")]
@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.904.0.0")]
-[assembly: AssemblyFileVersion("0.904.0.0")]
+[assembly: AssemblyVersion("0.955.0.0")]
+[assembly: AssemblyFileVersion("0.955.0.0")]

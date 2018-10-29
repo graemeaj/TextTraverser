@@ -11,6 +11,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TextTraverser\tadupd02.wav = TextTraverser\tadupd02.wav
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleableWindow1", "StyleableWindow1", "{B7D11E07-905D-4637-B561-301F7E1D7851}"
+	ProjectSection(SolutionItems) = preProject
+		TextTraverser\StyleableWindow\ControlDoubleClickBehavior.cs = TextTraverser\StyleableWindow\ControlDoubleClickBehavior.cs
+		TextTraverser\StyleableWindow\ShowSystemMenuBehavior.cs = TextTraverser\StyleableWindow\ShowSystemMenuBehavior.cs
+		TextTraverser\StyleableWindow\SystemMenuManager.cs = TextTraverser\StyleableWindow\SystemMenuManager.cs
+		TextTraverser\StyleableWindow\WindowCloseCommand.cs = TextTraverser\StyleableWindow\WindowCloseCommand.cs
+		TextTraverser\StyleableWindow\WindowDragBehavior.cs = TextTraverser\StyleableWindow\WindowDragBehavior.cs
+		TextTraverser\StyleableWindow\WindowMaximizeCommand.cs = TextTraverser\StyleableWindow\WindowMaximizeCommand.cs
+		TextTraverser\StyleableWindow\WindowMinimizeCommand.cs = TextTraverser\StyleableWindow\WindowMinimizeCommand.cs
+		TextTraverser\StyleableWindow\WindowResizeBehavior.cs = TextTraverser\StyleableWindow\WindowResizeBehavior.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

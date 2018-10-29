@@ -33,7 +33,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.940";
+            versionNumber = "0.955";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -477,43 +477,67 @@ namespace TextTraverser
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)//Copy File Path
         {
-            if (listBox.SelectedItem.ToString() != "")
+            try
             {
-                String path = listBox.SelectedItem.ToString();
-                path = path.Replace("\r", "");
-                CopyStringToClipBoard(path);
-                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
-                player.Play();
+                if (listBox.SelectedItem.ToString() != "")
+                {
+                    String path = listBox.SelectedItem.ToString();
+                    path = path.Replace("\r", "");
+                    CopyStringToClipBoard(path);
+                    notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                    player.Play();
+                }
+            }
+            catch
+            {
+
             }
 
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)//Copy File Name Only
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)//Copy File Name Only //minus drive
         {
-            if (listBox.SelectedItem.ToString() != "")
+            try
             {
-                string path = @listBox.SelectedItem.ToString();
-                path = path.Replace("\r", "");
-                path = Path.GetFileNameWithoutExtension(path);
-                CopyStringToClipBoard(path);
-                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
-                player.Play();
+                if (listBox.SelectedItem.ToString() != "")
+                {
+                    string path = @listBox.SelectedItem.ToString();
+                    path = path.Replace("\r", "");
+                    path = Path.GetFullPath(path); // GetFileNameWithoutExtension(path);
+                    path = path.Remove(0,3);
+                    path = path.Substring(0, path.Length - 4);
+                    CopyStringToClipBoard(path);
+                    notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                    player.Play();
+                }
             }
+            catch
+            {
+
+            }
+
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)//Copy File Name And Extension
         {
-            if (listBox.SelectedItem.ToString() != "")
+            try
             {
-                string path = listBox.SelectedItem.ToString();
-                path = path.Replace("\r", "");
-                path = Path.GetFileName(path);
-                CopyStringToClipBoard(path);
-                notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
-                player.Play();
+                if (listBox.SelectedItem.ToString() != "")
+                {
+                    string path = listBox.SelectedItem.ToString();
+                    path = path.Replace("\r", "");
+                    path = Path.GetFileName(path);
+                    CopyStringToClipBoard(path);
+                    notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
+                    player.Play();
+                }
+            }
+            catch
+            {
+
             }
         }
     }
