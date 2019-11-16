@@ -369,6 +369,7 @@ namespace TextTraverser
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
             player.Play();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
             if (result == System.Windows.Forms.DialogResult.OK) // Test result.
             {
@@ -538,6 +539,43 @@ namespace TextTraverser
             catch
             {
 
+            }
+        }
+
+        //stolen from the stud, Jimmy T https://stackoverflow.com/questions/5014825/triple-mouse-click-in-c
+        private int _clicks = 0;
+        private Timer _timer = new Timer();
+        private System.Windows.Controls.TextBox TB = new System.Windows.Controls.TextBox();
+        private void TextBox_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Debug.Write("Click up");
+            try
+            {
+                TB = (System.Windows.Controls.TextBox)sender;
+            }
+            catch
+            {
+                System.Diagnostics.Debug.Write("Error: NOT A VALID LISTBOX");
+                return;
+            }
+            _timer.Stop();
+            _clicks++;
+            if (_clicks == 3)
+            {
+                // this means the trip click happened - do something
+                TB.SelectAll();
+                _clicks = 0;
+                System.Diagnostics.Debug.Write("THE TRIPLE CLICK");
+            }
+            if (_clicks < 3)
+            {
+                _timer.Interval = SystemInformation.DoubleClickTime;
+                _timer.Start();
+                _timer.Tick += (s, t) =>
+                {
+                    _timer.Stop();
+                    _clicks = 0;
+                };
             }
         }
     }

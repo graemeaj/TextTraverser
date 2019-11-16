@@ -86,15 +86,17 @@ namespace TextTraverser
             extention = Regex.Replace(extention, @"[^0-9a-zA-Z]+", "");//makes sure there is only alpha-numeric input for the extention
 
             string arguments;
+            string printIntro =
+                "/t:{28|4} /k echo \"*********************************\ntext\n*********************************\" &&"
+                ;
 
-            arguments = "/C dir " + path + "*." + extention + " /b /on /s > " + currentDirectory + fileName + ".txt";//concatenating the argument to be passed to cmd
+            arguments = printIntro + "dir " + path + "*." + extention + " /b /on /s > " + currentDirectory + fileName + ".txt";//concatenating the argument to be passed to cmd
 
-            CMD.StartInfo.UseShellExecute = true;
+            Debug.Write(arguments + " big butts");
             CMD.StartInfo.FileName = "cmd.exe";
-            CMD.StartInfo.CreateNoWindow = true;
+            //CMD.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             CMD.StartInfo.Arguments = arguments;
             CMD.Start();
-            //CMD.Start("cmd.exe", arguments);
             CMD.WaitForExit();//waits for cmd to finish
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tadupd02);
             player.Play();
@@ -104,6 +106,7 @@ namespace TextTraverser
             }
             catch (IOException)
             {
+
             }
             
         }
