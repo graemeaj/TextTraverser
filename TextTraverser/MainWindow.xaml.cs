@@ -468,6 +468,56 @@ namespace TextTraverser
 
         private void listBox_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var item = VisualTreeHelper.HitTest(listBox, Mouse.GetPosition(listBox)).VisualHit;
+            int maxLength = 70;
+            // find ListViewItem (or null)
+            while (item != null && !(item is ListBoxItem))
+                item = VisualTreeHelper.GetParent(item);
+
+            if (item != null)
+            {
+                int i = listBox.Items.IndexOf(((ListBoxItem)item).DataContext);
+                System.Diagnostics.Debug.Write("Right clicked item " + i.ToString());
+                var hitListItem = listBox.Items.GetItemAt(i);
+
+                if (hitListItem != null)
+                {
+                    if (hitListItem.ToString().Length > maxLength)
+                    {
+                        CopyPath.Header = Truncate.TruncateString(CopyFilePath(hitListItem.ToString()), 34);
+                        if(CopyFileNameOnly(hitListItem.ToString()).Length < maxLength)
+                        {
+                            CopyNameOnly.Header = CopyFileNameOnly(hitListItem.ToString());
+                        }
+                        else
+                        {
+                            CopyNameOnly.Header = Truncate.TruncateString(CopyFileNameOnly(hitListItem.ToString()), 34);
+                        }
+                        
+                        if(CopyFileNameAndExtension(hitListItem.ToString()).Length < maxLength)
+                        {
+                            CopyNameExtension.Header = CopyFileNameAndExtension(hitListItem.ToString());
+                        }
+                        else
+                        {
+                            CopyNameExtension.Header = Truncate.TruncateString(CopyFileNameAndExtension(hitListItem.ToString()), 34);
+                        }
+                        
+                    }
+                    else
+                    {
+                        CopyPath.Header = CopyFilePath(hitListItem.ToString());
+                        CopyNameOnly.Header = CopyFileNameOnly(hitListItem.ToString());
+                        CopyNameExtension.Header = CopyFileNameAndExtension(hitListItem.ToString());
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.Write("Item is null! ");
+                }
+            }
+
+            
 
         }
 
@@ -483,7 +533,7 @@ namespace TextTraverser
                 if (listBox.SelectedItem.ToString() != "")
                 {
                     String path = listBox.SelectedItem.ToString();
-                    path = path.Replace("\r", "");
+                    path = CopyFilePath(path);
                     CopyStringToClipBoard(path);
                     notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
@@ -495,6 +545,12 @@ namespace TextTraverser
 
             }
 
+        }
+
+        private string CopyFilePath(string s)
+        {
+            string path = s.Replace("\r", "");
+            return path;
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)//Copy File Name Only //minus drive
@@ -504,10 +560,7 @@ namespace TextTraverser
                 if (listBox.SelectedItem.ToString() != "")
                 {
                     string path = @listBox.SelectedItem.ToString();
-                    path = path.Replace("\r", "");
-                    path = Path.GetFullPath(path); // GetFileNameWithoutExtension(path);
-                    path = path.Remove(0,3);
-                    path = path.Substring(0, path.Length - 4);
+                    path = CopyFileNameOnly(path);
                     CopyStringToClipBoard(path);
                     notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
@@ -521,6 +574,15 @@ namespace TextTraverser
 
         }
 
+        private string CopyFileNameOnly(string s)
+        {
+            string path = s.Replace("\r", "");
+            path = Path.GetFullPath(path); // GetFileNameWithoutExtension(path);
+            path = path.Remove(0, 3);
+            path = path.Substring(0, path.Length - 4);
+            return path;
+        }
+
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)//Copy File Name And Extension
         {
             try
@@ -528,8 +590,7 @@ namespace TextTraverser
                 if (listBox.SelectedItem.ToString() != "")
                 {
                     string path = listBox.SelectedItem.ToString();
-                    path = path.Replace("\r", "");
-                    path = Path.GetFileName(path);
+                    path = CopyFileNameAndExtension(path);
                     CopyStringToClipBoard(path);
                     notificationLabel.Content = "\"" + path + "\"" + " Copied to Clipboard";
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.BUTTON1);
@@ -540,6 +601,13 @@ namespace TextTraverser
             {
 
             }
+        }
+
+        private string CopyFileNameAndExtension(string s)
+        {
+            string path = s.Replace("\r", "");
+            path = Path.GetFileName(path);
+            return path;
         }
 
         //stolen from the stud, Jimmy T https://stackoverflow.com/questions/5014825/triple-mouse-click-in-c

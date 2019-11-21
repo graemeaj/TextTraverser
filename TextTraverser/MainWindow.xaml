@@ -21,15 +21,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="textBox_KeyUp" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="68,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Cursor="IBeam" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" PreviewMouseLeftButtonUp="TextBox_MouseUp"/>
-        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" MouseRightButtonDown="listBox_MouseRightButtonDown" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#EDCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="True">
+        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" PreviewMouseRightButtonDown="listBox_MouseRightButtonDown" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#EDCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="True">
             <ListBox.ContextMenu>
                 <ContextMenu Background="#FF222227" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE6E6EA" HasDropShadow="True" BorderBrush="{x:Null}" BorderThickness="0" Margin="-32,0,0,0">
                     <ContextMenu.BindingGroup>
                         <BindingGroup/>
                     </ContextMenu.BindingGroup>
-                    <MenuItem Header="Copy File Path" Click="MenuItem_Click" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}" Margin="0"/>
-                    <MenuItem Header="Copy File Name Only" Click="MenuItem_Click_1" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}"/>
-                    <MenuItem Header="Copy File Name And Extension" Click="MenuItem_Click_2" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}"/>
+                    <MenuItem x:Name="CopyPath" Header="Copy File Path" Click="MenuItem_Click" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}" Margin="0"/>
+                    <MenuItem x:Name="CopyNameOnly" Header="Copy File Name Only" Click="MenuItem_Click_1" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}"/>
+                    <MenuItem x:Name="CopyNameExtension" Header="Copy File Name And Extension" Click="MenuItem_Click_2" FontSize="16" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" Background="{x:Null}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
