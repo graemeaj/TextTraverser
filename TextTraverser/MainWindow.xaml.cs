@@ -33,7 +33,7 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.955";
+            versionNumber = "0.975";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
