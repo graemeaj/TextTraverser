@@ -11,6 +11,7 @@ using System.Reflection;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media;
+using System.Runtime.InteropServices;
 
 namespace TextTraverser
 {
@@ -29,11 +30,14 @@ namespace TextTraverser
 
         private SolidColorBrush buttonBrush;
 
+        [DllImport("User32.dll")]
+        private static extern bool SetCursorPos(int X, int Y);
+
         public MainWindow()
         {
 
             //meta information
-            versionNumber = "0.975";
+            versionNumber = "0.985";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
 
@@ -43,6 +47,16 @@ namespace TextTraverser
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             settings = new Config();
             searcher.getText(config.AppSettings.Settings["previousPath"].Value, config, notificationLabel);
+
+            Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
+            Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
+
+            if(Left < 0 || Top < 0)
+            {
+                Left = 200;
+                Top = 200;
+            }
+
             System.Windows.Application.Current.MainWindow.Height = Convert.ToDouble(config.AppSettings.Settings["windowHeight"].Value);
             System.Windows.Application.Current.MainWindow.Width = Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value); 
 
@@ -50,17 +64,41 @@ namespace TextTraverser
             System.Console.Write("the width is " + Convert.ToDouble(config.AppSettings.Settings["windowWidth"].Value));
 
             System.Windows.Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-            Left = Convert.ToDouble(config.AppSettings.Settings["windowLocationX"].Value); //settings.windowLocationX;
-            Top = Convert.ToDouble(config.AppSettings.Settings["windowLocationY"].Value); //settings.windowLocationY;
+
+            System.Windows.Application.Current.MainWindow.Left = Left;
+            System.Windows.Application.Current.MainWindow.Top = Top;
 
             //listBox.KeyDown += HandleKeyUpSelected;
 
             textBox.Focus();
 
             this.Loaded += new RoutedEventHandler(windowLoaded);
+
+            this.StateChanged += MainWindow_StateChanged;
         }
 
+        private void MainWindow_StateChanged(object sender, EventArgs e)
+        {
+            FocusToTextBox();
+        }
 
+        private void FocusToTextBox()
+        {
+            Keyboard.Focus(textBox);
+            textBox.Focus();
+            textBox.SelectAll();
+            SetCursor((int)textBox.TransformToAncestor(this).Transform(new System.Windows.Point(0, 0)).X, (int)textBox.TransformToAncestor(this).Transform(new System.Windows.Point(0, 0)).Y);
+        }
+
+        private static void SetCursor(int x, int y)
+        {
+            // Left boundary
+            var xL = (int)App.Current.MainWindow.Left;
+            // Top boundary
+            var yT = (int)App.Current.MainWindow.Top;
+
+            SetCursorPos(x + xL, y + yT);
+        }
 
         public void windowLoaded(object sender, RoutedEventArgs e)
         {
@@ -225,7 +263,6 @@ namespace TextTraverser
                 //if the clicked listbox contains nothing
             }
         }
-
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -521,6 +558,16 @@ namespace TextTraverser
 
         }
 
+        protected void OnActivated(object sender, System.EventArgs e)
+        {
+            FocusToTextBox();
+        }
+
+        protected void OnDeactivated(object sender, System.EventArgs e)
+        {
+            Keyboard.Focus(textBox);
+        }
+
         public void CopyStringToClipBoard(String path)
         {
             System.Windows.Clipboard.SetData(System.Windows.DataFormats.Text, path);
@@ -646,5 +693,7 @@ namespace TextTraverser
                 };
             }
         }
+
+
     }
 }

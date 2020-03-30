@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:TextTraverser"
         mc:Ignorable="d"
         Title="TextTraverser" Height="350" Width="525" MinHeight="300" MinWidth="370"
-        
+        Activated="OnActivated"
+        ShowInTaskbar="false"
+        Deactivated="OnDeactivated"
         SizeChanged="recordNewSize"
         LocationChanged="recordNewWindowLocation" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Background="#FFAC1F1F" Foreground="#FFF51212" BorderBrush="#FFA8A8AA" Style="{StaticResource CustomWindowStyle}" WindowStyle="None" OpacityMask="#FF743C3C" AllowsTransparency="True"
         >

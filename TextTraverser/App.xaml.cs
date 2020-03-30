@@ -13,5 +13,9 @@ namespace TextTraverser
     /// </summary>
     public partial class App : Application
     {
+        public void OnMinimize(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
