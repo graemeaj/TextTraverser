@@ -3,4 +3,4 @@
 
   This was built as a tool to effectively search through Windows OS hard drives quickly, using the explorer search is very very slow because it delves into txt files for content, as well the space isn't indexed to perform a task like this quickly.
   
-  Concept and design by Glenn Judkins, programmed by Graeme Judkins
+  Concept and design by **Glenn Judkins**, programmed by **Graeme Judkins**
