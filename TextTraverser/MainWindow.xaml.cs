@@ -37,10 +37,9 @@ namespace TextTraverser
         {
 
             //meta information
-            versionNumber = "0.990";
+            versionNumber = "0.985";
             buildTime = Assembly.GetExecutingAssembly().GetLinkerTime().ToString();
 
-            CreateTrayIcon();
 
             InitializeComponent();
             searcher = new TextSearch();    
@@ -78,26 +77,8 @@ namespace TextTraverser
             this.StateChanged += MainWindow_StateChanged;
         }
 
-        private void CreateTrayIcon()
-        {
-            NotifyIcon ni = new NotifyIcon();
-            ni.Icon = Properties.Resources.Eye3;
-            ni.Visible = true;
-            ni.Text = "TextTraverser V " + versionNumber;
-            ni.Click +=
-                delegate (object sender, EventArgs args)
-                {
-                    SystemCommands.RestoreWindow(this);
-                    Show();
-                    WindowState = WindowState.Normal;
-                    this.Activate();
-                    FocusToTextBox();
-                };
-        }
-
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            if(this.WindowState != WindowState.Minimized)
             FocusToTextBox();
         }
 
@@ -489,10 +470,6 @@ namespace TextTraverser
                     //if the clicked listbox contains nothing
                 }
             }
-            else if(e.Key == Key.Up && listBox.SelectedIndex == 0)
-            {
-                textBox.Focus(); 
-            }
         }
 
         private void textBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -584,13 +561,11 @@ namespace TextTraverser
         protected void OnActivated(object sender, System.EventArgs e)
         {
             FocusToTextBox();
-            this.ShowInTaskbar = true;
         }
 
         protected void OnDeactivated(object sender, System.EventArgs e)
         {
             Keyboard.Focus(textBox);
-            this.ShowInTaskbar = false;
         }
 
         public void CopyStringToClipBoard(String path)
