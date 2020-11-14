@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TextTraverser" Height="350" Width="525" MinHeight="300" MinWidth="370"
         Activated="OnActivated"
-        ShowInTaskbar="false"
+        ShowInTaskbar="true"
         Deactivated="OnDeactivated"
         SizeChanged="recordNewSize"
         LocationChanged="recordNewWindowLocation" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Background="#FFAC1F1F" Foreground="#FFF51212" BorderBrush="#FFA8A8AA" Style="{StaticResource CustomWindowStyle}" WindowStyle="None" OpacityMask="#FF743C3C" AllowsTransparency="True"
@@ -22,8 +22,8 @@
             <RowDefinition Height="62"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="textBox_KeyUp" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="68,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Cursor="IBeam" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" PreviewMouseLeftButtonUp="TextBox_MouseUp"/>
-        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" PreviewMouseRightButtonDown="listBox_MouseRightButtonDown" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#EDCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="True">
+        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="textBox_KeyUp" TextChanged="textBox_TextChanged" TextAlignment="Center" Margin="68,57,131,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Cursor="IBeam" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" PreviewMouseLeftButtonUp="TextBox_MouseUp" IsTabStop="false"/>
+        <ListBox x:Name="listBox" MouseLeftButtonDown="listBox_Selected" KeyUp="listBox_KeyUp" PreviewMouseRightButtonDown="listBox_MouseRightButtonDown" MouseDoubleClick="list_item_clicked" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="listBox_SelectionChanged" Margin="2,26,2,25" Cursor="Arrow" Background="#EDCFCFCF" Foreground="#FF3C3B3B" BorderBrush="#FFA8A8AA" Padding="1" IsTabStop="False" KeyboardNavigation.DirectionalNavigation="None">
             <ListBox.ContextMenu>
                 <ContextMenu Background="#FF222227" FontFamily="/TextTraverser;component/#Fixedsys Excelsior 3.01" FontSize="16" Foreground="#FFE6E6EA" HasDropShadow="True" BorderBrush="{x:Null}" BorderThickness="0" Margin="-32,0,0,0">
                     <ContextMenu.BindingGroup>
@@ -35,8 +35,8 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" KeyUp="textBoxPath_KeyUp" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="113,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" SelectionBrush="#FF5496CB" PreviewMouseLeftButtonUp="TextBox_MouseUp"/>
-        <Button x:Name="button" Content="Refresh Path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="106" Height="23" Click="button_Click" Foreground="#FFE6E6EA" BorderBrush="#FF6366AC" MouseEnter="button_MouseEnter" MouseLeave="button_MouseLeave">
+        <TextBox x:Name="textBoxPath" TextWrapping="Wrap" Text="" KeyUp="textBoxPath_KeyUp" TextChanged="textBox_TextChanged" KeyDown="textBoxPath_KeyDown" TextAlignment="Left" Margin="113,29,40,0" Height="23" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF373746" Foreground="#FFE6E6EA" BorderBrush="#FFA8A8AA" CaretBrush="#FFE6E6EA" SelectionBrush="#FF5496CB" PreviewMouseLeftButtonUp="TextBox_MouseUp" IsTabStop="False"/>
+        <Button x:Name="button" Content="Refresh Path" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Width="106" Height="23" Click="button_Click" Foreground="#FFE6E6EA" BorderBrush="#FF6366AC" MouseEnter="button_MouseEnter" MouseLeave="button_MouseLeave" IsTabStop="False">
             <Button.Background>
                 <SolidColorBrush Color="#FF505066"/>
             </Button.Background>
