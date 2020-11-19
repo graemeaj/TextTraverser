@@ -195,6 +195,7 @@
   <ItemGroup>
     <Content Include="BUTTON.WAV" />
     <Content Include="BUZZ.WAV" />
+    <Resource Include="Resources\EyeCon.ico" />
     <Content Include="tadupd02.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
